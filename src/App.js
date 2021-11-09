@@ -11,14 +11,17 @@ import QuizSI from "./Components/QuizSI";
 
 function App() {
   const [gameState, setGameState] = useState("menu");
+  const [score, setScore] = useState(0);
   return (
     <div className="App">
       <h1>Quiz App</h1>
 
-      <QuizContext.Provider value={{ gameState, setGameState }}>
+      <QuizContext.Provider
+        value={{ gameState, setGameState, score, setScore }}
+      >
         {gameState === "menu" && <MainMenu />}
         {gameState === "quiz" && <Quiz />}
-        {gameState === "quizii" && <QuizII />}
+        {gameState === "quizii" && <Quiz />}
         {gameState === "quizis" && <QuizIS />}
         {gameState === "quizsi" && <QuizSI />}
         {gameState === "end screen" && <EndScreen />}

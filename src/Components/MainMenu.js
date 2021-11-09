@@ -28,13 +28,6 @@ export default function MainMenu() {
         </button>
         <button className="option">quiz 4</button>
       </div>
-      <button
-        onClick={() => {
-          setGameState("quiz");
-        }}
-      >
-        Start Quiz
-      </button>
     </div>
   );
 }
