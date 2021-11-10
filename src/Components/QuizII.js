@@ -1,11 +1,6 @@
 import React from "react";
+import Say from "react-say";
 
-function QuizII() {
-  return (
-    <div>
-      <h1>Quiz imagem imagem</h1>
-    </div>
-  );
-}
-
-export default QuizII;
+export default () => (
+  <Say speak="A quick brown fox jumped over the lazy dogs." />
+);
