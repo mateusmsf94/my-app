@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import { QuizContext } from "../Helpers/Contexts";
 import { Questions } from "../Helpers/QuestionBank";
 import { ExpectedTranscripts } from "../Helpers/ExpectedTranscript";
-import Say from "react-say";
 
 function QuizSI() {
   const { score, setScore, setGameState } = useContext(QuizContext);
@@ -26,7 +25,6 @@ function QuizSI() {
 
   return (
     <div className="Quiz">
-      <Say speak="vai civil" />
       <div className="options">
         <button className="option" onClick={() => setOptionChosen("A")}>
           {Questions[currQuestion].optionA}
