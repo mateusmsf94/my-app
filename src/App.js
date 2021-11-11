@@ -5,9 +5,10 @@ import Quiz from "./Components/Quiz";
 import EndScreen from "./Components/EndScreen";
 
 import { QuizContext } from "./Helpers/Contexts";
-import QuizII from "./Components/QuizII";
+
 import QuizIS from "./Components/QuizIS";
 import QuizSI from "./Components/QuizSI";
+import QuizSS from "./Components/QuizSS";
 
 function App() {
   const [gameState, setGameState] = useState("menu");
@@ -24,6 +25,7 @@ function App() {
         {gameState === "quizii" && <Quiz />}
         {gameState === "quizis" && <QuizIS />}
         {gameState === "quizsi" && <QuizSI />}
+        {gameState === "quizss" && <QuizSS />}
         {gameState === "end screen" && <EndScreen />}
       </QuizContext.Provider>
     </div>

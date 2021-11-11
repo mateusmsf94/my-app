@@ -1,10 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { QuizContext } from "../Helpers/Contexts";
-import { Questions } from "../Helpers/QuestionBank";
 import { ExpectedTranscripts } from "../Helpers/ExpectedTranscript";
 import { useSpeechSynthesis } from "react-speech-kit";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+import { Questions } from "../Helpers/QuestionBank";
 
-function QuizSI() {
+function QuizSS() {
   const { score, setScore, setGameState } = useContext(QuizContext);
 
   const [currQuestion, setCurrQuestion] = useState(0);
@@ -12,11 +15,23 @@ function QuizSI() {
 
   const { speak } = useSpeechSynthesis();
 
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    //browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  useEffect(() => {
+    speak({ text: ExpectedTranscripts[currQuestion] });
+  }, [currQuestion]);
+
   const nextQuestion = () => {
-    if (Questions[currQuestion].answer == optionChosen) {
+    if (ExpectedTranscripts[currQuestion] === transcript) {
       setScore(score + 1);
     }
     setCurrQuestion(currQuestion + 1);
+    resetTranscript();
   };
 
   const finishQuiz = () => {
@@ -26,25 +41,14 @@ function QuizSI() {
     setGameState("end screen");
   };
 
-  useEffect(() => {
-    speak({ text: ExpectedTranscripts[currQuestion] });
-  }, [currQuestion]);
-
   return (
     <div className="Quiz">
-      <div className="options">
-        <button className="option" onClick={() => setOptionChosen("A")}>
-          {Questions[currQuestion].optionA}
-        </button>
-        <button className="option" onClick={() => setOptionChosen("B")}>
-          {Questions[currQuestion].optionB}
-        </button>
-        <button className="option" onClick={() => setOptionChosen("C")}>
-          {Questions[currQuestion].optionC}
-        </button>
-        <button className="option" onClick={() => setOptionChosen("D")}>
-          {Questions[currQuestion].optionD}
-        </button>
+      <div>
+        <p>Microphone: {listening ? "on" : "off"}</p>
+        <button onClick={SpeechRecognition.startListening}>Start</button>
+        <button onClick={SpeechRecognition.stopListening}>Stop</button>
+        <button onClick={resetTranscript}>Reset</button>
+        <p>{transcript}</p>
       </div>
 
       {currQuestion == Questions.length - 1 ? (
@@ -56,4 +60,4 @@ function QuizSI() {
   );
 }
 
-export default QuizSI;
+export default QuizSS;

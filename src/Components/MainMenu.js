@@ -26,7 +26,9 @@ export default function MainMenu() {
         <button className="option" onClick={() => setGameState("quizsi")}>
           quiz som imagem
         </button>
-        <button className="option">quiz 4</button>
+        <button className="option" onClick={() => setGameState("quizss")}>
+          quiz som som{" "}
+        </button>
       </div>
     </div>
   );
